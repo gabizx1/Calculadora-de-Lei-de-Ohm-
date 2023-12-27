@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculadora de Lei de Ohm: </h1>
+    <img src="https://www.dreaminc.com.br/sala_de_aula/wp-content/uploads/tabela-de-ohm.jpg">
+    <img src="https://drb-m.org/Arnulpho/5.RESISTENCIA%20ELETRICA_arquivos/image002.jpg">
+    <br>
+    Primeiro número (Ω):<br/>
+    <input id="n1" type="number"/><br/>
+    Segundo número:<br/>
+    <input id="n2" type="number"/><br/><br/>
+    <button onclick="multiplicar()">Multiplicar</button>
+    <br/><br/>
+    O resultado é: <span></span>
+
+    <script>
+        var n1 = document.querySelector('#n1')
+        var n2 = document.querySelector('#n2')
+        var resultado = document.querySelector('span')
+
+        function multiplicar(){
+            resultado.innerHTML= parseInt(n1.value) * parseFloat(n2.value)
+        }
+    </script>
+</body>
+</html>
