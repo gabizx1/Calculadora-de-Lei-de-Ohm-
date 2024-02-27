@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Elétrica</title>
+    <style>
+   
+        input, button {
+            margin: 0px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Calculadora Elétrica</h1>
+
+    <label for="calculo">Escolha o cálculo:</label>
+    <select id="calculo" onchange="teste(this)">
+        <option value="tensao" >Tensão</option>
+        <option value="resistencia">Resistência</option>
+        <option value="corrente">Corrente</option>
+    </select>
+
+    <hr/>
+
+    <div id="inputs">
+        <input type="number" id="inputA" placeholder= "Corrente">
+        <input type="number" id="inputB" placeholder= "Resistência">
+    </div>
+
+    <br>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <h2>Resultado:</h2>
+    <div id="resultado"></div>
+
+    <script>
+        var placeholder;
+        function teste(e){
+           
+           var p1 = document.querySelector("#inputA");
+           var p2 = document.querySelector("#inputB")
+           if (e.value === "tensao") {
+                p1.placeholder = "Corrente"
+                p2.placeholder = "Resistência"
+            } else if (e.value === "resistencia") {
+                p1.placeholder = "Tensão"
+                p2.placeholder = "Corrente"
+            } else if (e.value === "corrente") {
+                p1.placeholder = "Tensão"
+                p2.placeholder = "Resistência"
+            } else {
+                alert("Operação inválida!");
+                resultado = 0;
+            }
+        }
+
+        function calcular() {
+            var calculo = document.getElementById("calculo").value;
+            var inputA = parseFloat(document.getElementById("inputA").value);
+            var inputB = parseFloat(document.getElementById("inputB").value);
+            var resultado;
+
+
+            if (isNaN(inputA) || isNaN(inputB)) {
+                alert("Por favor, insira valores numéricos válidos.");
+                return;
+            }
+
+            if (calculo === "tensao") {
+                resultado = inputA * inputB;
+            } else if (calculo === "resistencia") {
+                resultado = inputA / inputB;
+            } else if (calculo === "corrente") {
+                resultado = inputA / inputB;
+            } else {
+                alert("Operação inválida!");
+                resultado = 0;
+            }
+
+
+            document.getElementById("resultado").innerHTML = "Resultado: " + resultado;
+        }
+    </script>
+</body>
+</html>
