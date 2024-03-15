@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Elétrica</title>
+    <style>
+   
+        input, div{
+            margin-block-end: 5px;
+            padding: 10px;
+            font-size: 16px;
+            justify-items: center;
+        }
+        
+        #title{
+            position: absolute;
+            top: 100px;
+            left: 630px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgba(89, 18, 117, 0.753);
+            font-size: 25px;
+        }
+
+        #grandezas, #grandezas1{
+            padding: 10px;
+            width: 100px;
+            font-size: 16px;
+        }
+
+        #central{
+            padding: 100px;
+            padding-top: 20px;
+            background-color: rgba(209, 207, 207, 0.795);
+            position: absolute; 
+            left: 620px; /* posiciona a 90px para a esquerda */ 
+            top: 250px;
+            border-radius: 5%;
+            
+        }
+
+        h2{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: black;
+            
+        }
+
+        #inicio{
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 5px;
+            align-items: center;
+        }
+
+        #calculo{
+            padding: 20px;
+            height: 10px;
+        }
+
+        button{
+            align-items: center;
+            padding: 10px;
+            position: absolute;
+            width: 100px;
+            left: 250px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <div id="title">
+        <h1>Calculadora Elétrica</h1>
+    </div>
+ 
+    
+    <div id="central">
+        
+        <div id="inicio">
+            <label for="calculo"><h2><b>Escolha o cálculo:</b></h2></label>
+                <select id="calculo" onchange="teste(this)">
+                    <option value="tensao" >Tensão</option>
+                    <option value="resistencia">Resistência</option>
+                    <option value="corrente">Corrente</option>
+                </select>
+        </div>
+        
+        <hr/>
+        <div id="input">
+            <input type="number" id="inputA" placeholder= "Corrente">        
+            <select id="grandezas1" onchange = "grandeza(this)">
+                <option value="Ohm"> Ampere </option>
+                <option value="Kohm"> Kilo-Ampere</option>
+                <option value="Mohm"> Mega-Ampere  </option>
+                <option value="mohm"> Mili-Ampere </option>
+                <option value="uohm"> Micro-Ampere </option>
+            </select>
+                
+                
+        </div>
+
+            <div id="input">
+                <input type="number" id="inputB" placeholder= "Resistência">
+                <!--<select id="grandezas" onchange = "grandeza(this)">
+                    <option value="Ohm"> Ohm </option>
+                    <option value="Kohm"> Kilo-Ohm</option>
+                    <option value="Mohm"> Mega-Ohm  </option>
+                    <option value="mohm"> Mili-ohm </option>
+                    <option value="uohm"> Micro-ohm </option>
+                </select>-->
+
+            </div>
+
+            <div style="padding-block-end: 40px;">
+                <button  onclick="calcular()">Calcular</button>
+            </div>
+            
+            <h2>Resultado:</h2>
+            <div id="resultado"></div>
+    </div>
+
+    <br>
+
+    
+    
+
+    <script>
+        var placeholder;
+
+        const grandezas = [{ value: "ohm", title:"Ohm"},{value: "Kohm", title:"Kilo-Ohm"},{value: "Mohm", title:"Mega-Ohm"},{value: "mohm", title:"Mili-Ohm"},{value: "uohm", title:"Micro-Ohm"} ]
+        const sel = document.getElementById("grandezas")
+
+        for (var i=0; i<=5; i++){
+            sel.innerHTML+=`<option value="${grandezas[i].value}">${grandezas[i].title} </option>`
+        }
+      
+
+
+        function teste(e){
+           
+           var p1 = document.querySelector("#inputA");
+           var p2 = document.querySelector("#inputB")
+           if (e.value === "tensao") {
+                p1.placeholder = "Corrente"
+                p2.placeholder = "Resistência"
+            } else if (e.value === "resistencia") {
+                p1.placeholder = "Tensão"
+                p2.placeholder = "Corrente"
+            } else if (e.value === "corrente") {
+                p1.placeholder = "Tensão"
+                p2.placeholder = "Resistência"
+            } else {
+                alert("Operação inválida!");
+                resultado = 0;
+            }
+        }
+
+        function calcular() {
+            var calculo = document.getElementById("calculo").value;
+            var inputA = parseFloat(document.getElementById("inputA").value);
+            var inputB = parseFloat(document.getElementById("inputB").value);
+            var resultado;
+
+
+            if (isNaN(inputA) || isNaN(inputB)) {
+                alert("Por favor, insira valores numéricos válidos.");
+                return;
+            }
+
+            if (calculo === "tensao") {
+                resultado = inputA * inputB;
+            } else if (calculo === "resistencia") {
+                resultado = inputA / inputB;
+            } else if (calculo === "corrente") {
+                resultado = inputA / inputB;
+            } else {
+                alert("Operação inválida!");
+                resultado = 0;
+            }
+
+
+            document.getElementById("resultado").innerHTML = "Resultado: " + resultado;
+        }
+    </script>
+</body>
+</html>
